@@ -1,5 +1,5 @@
 {
-    "name": "alcamo/json",
+    "name": "alcamo/html-creation",
     "description": "Simple classes to create HTML code without need for a factory",
     "keywords": [ "html", "factory" ],
     "license": "Apache-2.0",
