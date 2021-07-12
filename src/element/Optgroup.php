@@ -14,11 +14,11 @@ class Optgroup extends AbstractOptionList
     /**
      * @brief Create from sequence of values
      *
-     * @param @label Group label
+     * @param $label Group label
      *
      * @copydetails AbstractOptionList::createOptionArrayFromSequence()
      *
-     * @param @attrs Further attributes.
+     * @param $attrs Further attributes.
      */
     public static function newFromValueSequence(
         $label,
@@ -36,11 +36,11 @@ class Optgroup extends AbstractOptionList
     /**
      * @brief Create from map of values to contents
      *
-     * @param @label Group label
+     * @param $label Group label
      *
      * @copydetails AbstractOptionList::createOptionArrayFromMap()
      *
-     * @param @attrs Further attributes.
+     * @param $attrs Further attributes.
      */
     public static function newFromMap(
         $label,

@@ -6,6 +6,12 @@ use alcamo\xml_creation\Element as XmlElement;
 use alcamo\xml_creation\TokenList;
 
 /**
+ * @namespace alcamo::html_creation
+ *
+ * @brief Simple classes to create HTML code without need for a factory
+ */
+
+/**
  * @brief HTML element that can be serialized to HTML text
  *
  * @date Last reviewed 2021-06-15
