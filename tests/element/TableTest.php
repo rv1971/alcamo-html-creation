@@ -64,8 +64,6 @@ class TableTest extends TestCase
 
         $this->assertInstanceOf(TokenList::class, $table['class']);
 
-        $this->assertSame(count($content), count($table->getContent()));
-
         if ($table->getContent()) {
             $this->assertInstanceOf(Tr::class, $table->getContent()[0]);
         }
@@ -79,12 +77,13 @@ class TableTest extends TestCase
         'empty' => [ [], null, '<table></table>' ],
 
         'array' => [
-        [
-          [ 'FOO', new Td(42) ],
-          [ new B('BAR'), new Th(new I('QUX')) ]
-        ],
-        [ 'id' => 'quux'],
-        '<table id="quux"><tr><td>FOO</td><td>42</td></tr><tr><td><b>BAR</b></td><th><i>QUX</i></th></tr></table>',
+            [
+                [ 'FOO', new Td(42) ],
+                [ new B('BAR'), new Th(new I('QUX')) ],
+                null
+            ],
+            [ 'id' => 'quux'],
+            '<table id="quux"><tr><td>FOO</td><td>42</td></tr><tr><td><b>BAR</b></td><th><i>QUX</i></th></tr></table>',
         ]
         ];
     }

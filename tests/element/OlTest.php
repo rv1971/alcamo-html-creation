@@ -24,8 +24,6 @@ class OlTest extends TestCase
 
         $this->assertInstanceOf(TokenList::class, $ol['class']);
 
-        $this->assertSame(count($content), count($ol->getContent()));
-
         $this->assertEquals($expectedString, (string)$ol);
     }
 
@@ -35,7 +33,7 @@ class OlTest extends TestCase
         'empty' => [ [], null, '<ol></ol>' ],
 
         'array' => [
-        [ 'FOO', new Li(42), new B('BAR') ],
+            [ 'FOO', null, new Li(42), new B('BAR') ],
         null,
         '<ol><li>FOO</li><li>42</li><li><b>BAR</b></li></ol>',
         ],

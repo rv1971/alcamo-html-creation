@@ -16,8 +16,8 @@ abstract class AbstractOptionList extends AbstractSpecificElement
      *
      * @param $compareTo See $compareTo parameter in Option::__construct().
      *
-     * Creates an Option element for each value unless it is an element allowed
-     * within \<select>.
+     * Create an Option element for each non-`null` value unless it is an
+     * element allowed within \<select>.
      */
     public static function createOptionArrayFromSequence(
         iterable $values,
@@ -26,13 +26,15 @@ abstract class AbstractOptionList extends AbstractSpecificElement
         $options = [];
 
         foreach ($values as $value) {
-            $options[] =
-                ($value instanceof Raw
-                 || $value instanceof Option
-                 || $value instanceof Optgroup
-                 || $value instanceof AbstractScriptSupportingElement)
-                ? $value
-                : new Option($value, null, $compareTo);
+            if (isset($value)) {
+                $options[] =
+                    ($value instanceof Raw
+                     || $value instanceof Option
+                     || $value instanceof Optgroup
+                     || $value instanceof AbstractScriptSupportingElement)
+                    ? $value
+                    : new Option($value, null, $compareTo);
+            }
         }
 
         return $options;

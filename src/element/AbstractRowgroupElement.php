@@ -29,8 +29,8 @@ abstract class AbstractRowgroupElement extends AbstractSpecificElement
     /**
      * @brief Create an object that contains an array of Tr items
      *
-     * Items are wrapped into Tr elements, wrapping cell content into @ref
-     * CELL_CLASS if needed.
+     * Wrap each non-`null` item into a Tr element, wrapping cell content
+     * into @ref CELL_CLASS if needed.
      */
     public static function newFromRowsIterable(
         iterable $items,
@@ -39,12 +39,14 @@ abstract class AbstractRowgroupElement extends AbstractSpecificElement
         $content = [];
 
         foreach ($items as $item) {
-            $content[] =
-                ($item instanceof Raw
-                 || $item instanceof Tr
-                 || $item instanceof AbstractScriptSupportingElement)
-                ? $item
-                : new Tr($item, null, static::CELL_CLASS);
+            if (isset($item)) {
+                $content[] =
+                    ($item instanceof Raw
+                     || $item instanceof Tr
+                     || $item instanceof AbstractScriptSupportingElement)
+                    ? $item
+                    : new Tr($item, null, static::CELL_CLASS);
+            }
         }
 
         return new static($content, $attrs);

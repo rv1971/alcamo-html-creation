@@ -14,8 +14,8 @@ class Tr extends AbstractSpecificElement
     public const TAG_NAME = "tr";
 
     /**
-     * @brief Wrap each item into a cell unless it is an element allowed
-     * within \<tr>.
+     * @brief Wrap each non-`null` item into a cell unless it is an element
+     * allowed within \<tr>.
      *
      * @param $cellClass Class to wrap items into, defaults to Td
      */
@@ -31,12 +31,14 @@ class Tr extends AbstractSpecificElement
         $content = [];
 
         foreach ($items as $item) {
-            $content[] =
-                ($item instanceof Raw
-                 || $item instanceof AbstractTableCell
-                 || $item instanceof AbstractScriptSupportingElement)
-                ? $item
-                : new $cellClass($item);
+            if (isset($item)) {
+                $content[] =
+                    ($item instanceof Raw
+                     || $item instanceof AbstractTableCell
+                     || $item instanceof AbstractScriptSupportingElement)
+                    ? $item
+                    : new $cellClass($item);
+            }
         }
 
         parent::__construct($content, $attrs);

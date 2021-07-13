@@ -24,8 +24,6 @@ class UlTest extends TestCase
 
         $this->assertInstanceOf(TokenList::class, $ul['class']);
 
-        $this->assertSame(count($content), count($ul->getContent()));
-
         $this->assertEquals($expectedString, (string)$ul);
     }
 
@@ -35,7 +33,7 @@ class UlTest extends TestCase
         'empty' => [ [], null, '<ul></ul>' ],
 
         'array' => [
-        [ 'FOO', new Li(42), new B('BAR') ],
+            [ 'FOO', new Li(42), new B('BAR'), null ],
         null,
         '<ul><li>FOO</li><li>42</li><li><b>BAR</b></li></ul>',
         ],

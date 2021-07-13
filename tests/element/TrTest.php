@@ -25,8 +25,6 @@ class TrTest extends TestCase
 
         $this->assertInstanceOf(TokenList::class, $tr['class']);
 
-        $this->assertSame(count($content), count($tr->getContent()));
-
         $this->assertEquals($expectedString, (string)$tr);
     }
 
@@ -40,6 +38,7 @@ class TrTest extends TestCase
           'FOO',
           new Td(42),
           new B('BAR'),
+          null,
           new Th(new I('QUX'))
         ],
         null,

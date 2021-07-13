@@ -27,8 +27,6 @@ class OptgroupTest extends TestCase
 
         $this->assertInstanceOf(TokenList::class, $optgroup['class']);
 
-        $this->assertSame(count($values), count($optgroup->getContent()));
-
         $this->assertEquals($expectedString, (string)$optgroup);
     }
 
@@ -45,7 +43,7 @@ class OptgroupTest extends TestCase
 
         'array' => [
         'Foo',
-        [ 'a', 'b', 'c', 'd' ],
+        [ 'a', null, 'b', 'c', 'd' ],
         new Set([ 'a', 'd' ]),
         [ 'id' => 'foo' ],
         '<optgroup label="Foo" id="foo">'
