@@ -4,7 +4,7 @@
     "keywords": [ "html", "factory" ],
     "license": "Apache-2.0",
     "require": {
-        "php": "7.3 - 7.4",
+        "php": "7.3 - 8.0",
         "alcamo/core": "^0.1",
         "alcamo/xml-creation": "^0.1"
     },
