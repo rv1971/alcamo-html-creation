@@ -13,7 +13,7 @@ use alcamo\xml_creation\TokenList;
 class Attribute extends XmlAttribute
 {
     /// @copydoc alcamo::xml_creation::NodeInterface::__toString()
-    public function __toString()
+    public function __toString(): string
     {
         if (is_bool($this->content_)) {
           /**
