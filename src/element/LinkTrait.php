@@ -31,7 +31,8 @@ trait LinkTrait
         if (!is_readable($path)) {
             /** @throw alcamo::exception::FileNotFound if $path is not
              *  readable. */
-            throw new FileNotFound($path);
+            throw (new FileNotFound())
+                ->setMessageContext([ 'filename' => $path ]);
         }
 
         $m = 'm=' . gmdate('YmdHis', filemtime($path));

@@ -47,9 +47,8 @@ class InputTest extends TestCase
     {
         $this->expectException(InvalidEnumerator::class);
         $this->expectExceptionMessage(
-            'Invalid value "foo", expected one of: "'
-            . implode('", "', Input::TYPES)
-            . '"; not a valid <input> type'
+            'Invalid value "foo", expected one of ["button", "checkbox", "color", "date"...];'
+            . ' not a valid <input> type'
         );
 
         new Input([ 'type' => 'foo', 'name' => 'bar' ]);
