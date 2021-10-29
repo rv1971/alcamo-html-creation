@@ -53,6 +53,14 @@ class OptionTest extends TestCase
         '<option id="BAR">Bar</option>'
         ],
 
+        'empty-value' => [
+        '',
+        'Bar',
+        null,
+        [ 'id' => 'BAR' ],
+        '<option value="" id="BAR" selected="selected">Bar</option>'
+        ],
+
         'unselected-string' => [
         'bar',
         'foo',

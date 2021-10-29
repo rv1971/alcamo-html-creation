@@ -23,6 +23,11 @@ class Option extends AbstractSpecificElement
      * - Else, check whether $value is equal to $compareTo using the ==
      *   operator.
      *
+     * Set the attribute `checked` if $compareTo is `null` and value is the
+     * empty string. This allows to automatically select a default entry
+     * (which may mean "all" or "none") if nothing has been explicitely
+     * selected.
+     *
      * @param $attrs Further attributes. $content and $name override
      * `$attrs['content']` and `$attrs['name']`.
      */
@@ -51,6 +56,8 @@ class Option extends AbstractSpecificElement
                 default:
                     $attrs['selected'] = $value == $compareTo;
             }
+        } elseif ($value === '') {
+            $attrs['selected'] = true;
         }
 
         parent::__construct($content ?? $value, $attrs);
