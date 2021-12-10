@@ -11,6 +11,48 @@ class Radio extends Input
 {
     public const TYPE = 'radio';
 
+    public static function createLabeledRadiosFromValueSequence(
+        string $name,
+        iterable $values,
+        $compareTo = null,
+        ?array $attrs = null
+    ): array {
+        $radios = [];
+
+        foreach ($values as $value) {
+            if (isset($value)) {
+                $radios[(string)$value] = new Label(
+                    [
+                        new static($name, (string)$value, $compareTo, $attrs),
+                        (string)$value
+                    ]
+                );
+            }
+        }
+
+        return $radios;
+    }
+
+    public static function createLabeledRadiosFromMap(
+        string $name,
+        iterable $values,
+        $compareTo = null,
+        ?array $attrs = null
+    ): array {
+        $radios = [];
+
+        foreach ($values as $value => $label) {
+            $radios[(string)$value] = new Label(
+                [
+                    new static($name, (string)$value, $compareTo, $attrs),
+                    $label
+                ]
+            );
+        }
+
+        return $radios;
+    }
+
     /**
      * @param $name `name` attribute.
      *
