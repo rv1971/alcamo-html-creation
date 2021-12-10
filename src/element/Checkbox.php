@@ -17,7 +17,7 @@ class Checkbox extends Input
      * @param $value `value` attribute.
      *
      * @param $compareTo Set the attribute `checked` if $value is is contained
-     *  in $compareTo (see below). This is checked as follows:
+     *  in $compareTo. This is checked as follows:
      * - Call `$compareTo->contains($value)` if this method is available.
      * - Else, if $compareTo is an array, check whether is contains $value.
      * - Else, check whether $value is equal to $compareTo using the ==
