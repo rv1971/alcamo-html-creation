@@ -43,8 +43,26 @@ class Input extends AbstractSpecificElement
     ];
 
     /**
-     * @param $attrs Attributes. If `$attrs['type']` is not set and a class
-     * constant TYPE is defiend, `$attrs['type']` is set to static::TYPE.
+     * @param $name `name` attribute.
+     *
+     * @param $value `value` attribute.
+     *
+     * @param $attrs Further attributes. If ``$attrs['type']`` is not set and
+     * a class constant TYPE is defiend, ``$attrs['type']`` is set to
+     * static::TYPE. $name and $value override ``$attrs['name']`` and
+     * ``$attrs['value']``.
+     */
+    public static function newFromNameValue(
+        string $name,
+        $value,
+        ?array $attrs = null
+    ): self {
+        return new static(compact('name', 'value') + (array)$attrs);
+    }
+
+    /**
+     * @param $attrs Attributes. If ``$attrs['type']`` is not set and a class
+     * constant TYPE is defiend, ``$attrs['type']`` is set to static::TYPE.
      */
     public function __construct(array $attrs)
     {

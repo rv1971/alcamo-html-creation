@@ -28,12 +28,12 @@ class Checkbox extends Input
      * static::TYPE. $name and $value override `$attrs['name']` and
      * `$attrs['value']`.
      */
-    public function __construct(
+    public static function newFromNameValueCompare(
         $name,
         $value,
-        $compareTo = null,
+        $compareTo,
         ?array $attrs = null
-    ) {
+    ): self {
         $attrs = compact('name', 'value') + (array)$attrs;
 
         if (isset($compareTo)) {
@@ -51,6 +51,6 @@ class Checkbox extends Input
             }
         }
 
-        parent::__construct($attrs);
+        return new static($attrs);
     }
 }

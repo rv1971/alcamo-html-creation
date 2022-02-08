@@ -10,16 +10,21 @@ use alcamo\xml_creation\TokenList;
 class CheckboxTest extends TestCase
 {
   /**
-   * @dataProvider constructProvider
+   * @dataProvider newFromNameValueCompareProvider
    */
-    public function testConstruct(
+    public function testNewFromNameValueCompare(
         $name,
         $value,
         $compareTo,
         $attrs,
         $expectedString
     ) {
-        $checkbox = new Checkbox($name, $value, $compareTo, $attrs);
+        $checkbox = Checkbox::newFromNameValueCompare(
+            $name,
+            $value,
+            $compareTo,
+            $attrs
+        );
 
         $this->assertSame('input', $checkbox->getTagName());
 
@@ -30,7 +35,7 @@ class CheckboxTest extends TestCase
         $this->assertEquals($expectedString, (string)$checkbox);
     }
 
-    public function constructProvider()
+    public function newFromNameValueCompareProvider()
     {
         return [
             'no-comparison' => [

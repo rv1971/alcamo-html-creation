@@ -8,16 +8,17 @@ use alcamo\xml_creation\{Nodes, TokenList};
 class RadioTest extends TestCase
 {
   /**
-   * @dataProvider constructProvider
+   * @dataProvider newFromNameValueCompareProvider
    */
-    public function testConstruct(
+    public function testNewFromNameValueCompare(
         $name,
         $value,
         $compareTo,
         $attrs,
         $expectedString
     ) {
-        $radio = new Radio($name, $value, $compareTo, $attrs);
+        $radio =
+            Radio::newFromNameValueCompare($name, $value, $compareTo, $attrs);
 
         $this->assertSame('input', $radio->getTagName());
 
@@ -32,7 +33,7 @@ class RadioTest extends TestCase
         $this->assertEquals($expectedString, (string)$radio);
     }
 
-    public function constructProvider()
+    public function newFromNameValueCompareProvider()
     {
         return [
             'no-comparison' => [

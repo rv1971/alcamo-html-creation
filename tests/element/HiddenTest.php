@@ -8,15 +8,15 @@ use alcamo\xml_creation\TokenList;
 class HiddenTest extends TestCase
 {
   /**
-   * @dataProvider constructProvider
+   * @dataProvider newFromNameValueProvider
    */
-    public function testConstruct(
+    public function testNewFromNameValue(
         $name,
         $value,
         $attrs,
         $expectedString
     ) {
-        $hidden = new Hidden($name, $value, $attrs);
+        $hidden = Hidden::newFromNameValue($name, $value, $attrs);
 
         $this->assertSame('input', $hidden->getTagName());
 
@@ -27,7 +27,7 @@ class HiddenTest extends TestCase
         $this->assertEquals($expectedString, (string)$hidden);
     }
 
-    public function constructProvider()
+    public function newFromNameValueProvider()
     {
         return [
             'typical-use' => [
