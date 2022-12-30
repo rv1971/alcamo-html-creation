@@ -5,7 +5,7 @@
     "license": "Apache-2.0",
     "require": {
         "php": "7.3 - 8.0",
-        "alcamo/xml-creation": "^0.5"
+        "alcamo/xml-creation": "^0.6"
     },
     "autoload": {
 	"psr-4": {
