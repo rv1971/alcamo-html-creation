@@ -2,7 +2,7 @@
 
 namespace alcamo\html_creation\element;
 
-use alcamo\iana\MediaType;
+use alcamo\rdfa\MediaType;
 
 /**
  * @brief HTML element \<link>
