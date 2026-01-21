@@ -18,8 +18,8 @@ class TrTest extends TestCase
         $attrs,
         $cellClass,
         $expectedString
-    ) {
-        $tr = new Tr($content, $attrs, $cellClass);
+    ): void {
+        $tr = Tr::newFromItems($content, $attrs, $cellClass);
 
         $this->assertSame('tr', $tr->getTagName());
 
@@ -28,37 +28,37 @@ class TrTest extends TestCase
         $this->assertEquals($expectedString, (string)$tr);
     }
 
-    public function basicsProvider()
+    public function basicsProvider(): array
     {
         return [
-        'empty' => [ [], null, null, '<tr></tr>' ],
+            'empty' => [ [], null, null, '<tr></tr>' ],
 
-        'array' => [
-        [
-          'FOO',
-          new Td(42),
-          new B('BAR'),
-          null,
-          new Th(new I('QUX'))
-        ],
-        null,
-        null,
-        '<tr><td>FOO</td><td>42</td><td><b>BAR</b></td><th><i>QUX</i></th></tr>',
-        ],
+            'array' => [
+                [
+                    'FOO',
+                    new Td(42),
+                    new B('BAR'),
+                    null,
+                    new Th(new I('QUX'))
+                ],
+                null,
+                null,
+                '<tr><td>FOO</td><td>42</td><td><b>BAR</b></td><th><i>QUX</i></th></tr>',
+            ],
 
-        'Map' => [
-        new Map([
-          43,
-          new Script(null, [ 'src' => 'foo.js' ]),
-          new Th([ 'At vero eos', ' ' ]),
-          new Template('Lorem ipsum'),
-          new Td('baz', [ 'id' => 'qux' ])
-        ]),
-        [ 'class' => 'important' ],
-        Th::class,
-        '<tr class="important"><th>43</th><script src="foo.js"></script>'
-        . '<th>At vero eos </th><template>Lorem ipsum</template><td id="qux">baz</td></tr>',
-        ],
+            'Map' => [
+                new Map([
+                    43,
+                    new Script(null, [ 'src' => 'foo.js' ]),
+                    new Th([ 'At vero eos', ' ' ]),
+                    new Template('Lorem ipsum'),
+                    new Td('baz', [ 'id' => 'qux' ])
+                ]),
+                [ 'class' => 'important' ],
+                Th::class,
+                '<tr class="important"><th>43</th><script src="foo.js"></script>'
+                . '<th>At vero eos </th><template>Lorem ipsum</template><td id="qux">baz</td></tr>',
+            ],
         ];
     }
 }

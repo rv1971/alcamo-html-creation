@@ -7,45 +7,55 @@ use alcamo\xml_creation\Raw;
 /**
  * @brief Base class for elements that may have \<tr> children
  *
- * @date Last reviewed 2021-06-15
+ * @date Last reviewed 2026-01-21
  */
 abstract class AbstractRowgroupElement extends AbstractSpecificElement
 {
     /// Default class to wrap cell content into
-    public const CELL_CLASS = Td::class;
+    public const DEFAULT_CELL_CLASS = Td::class;
 
     /**
      * @brief Create an object that contains one Tr item
      *
-     * Items are wrapped into @ref CELL_CLASS if needed.
+     * @params $items Items that are wrapped into cells if needed (and if
+     * non-`null`), using DEFAULT_CELL_CLASS.
+     *
+     * @param $attrs Attributes to apply to this element (not to the \<tr>
+     * element).
      */
     public static function newFromCellsIterable(
         iterable $items,
-        ?iterable $attrs = null
+        ?array $attrs = null
     ): self {
-        return new static(new Tr($items, null, static::CELL_CLASS), $attrs);
+        return new static(
+            Tr::newFromItems($items, null, static::DEFAULT_CELL_CLASS),
+            $attrs
+        );
     }
 
     /**
      * @brief Create an object that contains an array of Tr items
      *
-     * Wrap each non-`null` item into a Tr element, wrapping cell content
-     * into @ref CELL_CLASS if needed.
+     * @params $rows Rows that are wrapped item into Tr elements if needed
+     * (and if non-`null`), using DEFAULT_CELL_CLASS.
+     *
+     * @param $attrs Attributes to apply to this element (not to the \<tr>
+     * element).
      */
     public static function newFromRowsIterable(
-        iterable $items,
-        ?iterable $attrs = null
+        iterable $rows,
+        ?array $attrs = null
     ): self {
         $content = [];
 
-        foreach ($items as $item) {
-            if (isset($item)) {
+        foreach ($rows as $row) {
+            if (isset($row)) {
                 $content[] =
-                    ($item instanceof Raw
-                     || $item instanceof Tr
-                     || $item instanceof AbstractScriptSupportingElement)
-                    ? $item
-                    : new Tr($item, null, static::CELL_CLASS);
+                    ($row instanceof Raw
+                     || $row instanceof Tr
+                     || $row instanceof AbstractScriptSupportingElement)
+                    ? $row
+                    : Tr::newFromItems($row, null, static::DEFAULT_CELL_CLASS);
             }
         }
 

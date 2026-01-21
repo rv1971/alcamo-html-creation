@@ -10,16 +10,53 @@ use alcamo\rdfa\MediaType;
  * Derived classes my define a class constant REL which becomes the default
  * value for the `rel` attribute.
  *
- * @date Last reviewed 2021-06-16
+ * @date Last reviewed 2026-01-21
  */
 class Link extends AbstractSpecificElement
 {
-    use LinkTrait;
-
     public const TAG_NAME = "link";
 
     /**
-     * @copydetails __construct()
+     * @param $href string Local URL, potentially with a query part.
+     *
+     * @param $path Local path.
+     *
+     * @return URL enriched with a modification date parameter.
+     */
+    public static function augmentLocalUrl(
+        string &$href,
+        ?string &$path = null
+    ): void {
+        $a = explode('?', $href, 2);
+
+        /** If $path is not set, set it to $href without query part. */
+        if (!isset($path)) {
+            $path = $a[0];
+        }
+
+        if (!is_readable($path)) {
+            /** @throw alcamo::exception::FileNotFound if $path is not
+             *  readable. */
+            throw (new FileNotFound())
+                ->setMessageContext([ 'filename' => $path ]);
+        }
+
+        $m = 'm=' . gmdate('YmdHis', filemtime($path));
+
+        /** Append modification timestamp if not yet present in $href. */
+        if (!isset($a[1])) {
+            $href .= "?$m";
+        } elseif (
+            substr($a[1], 0, 2) != 'm=' && strpos($a[1], '&m=') === false
+        ) {
+            $href .= "&$m";
+        }
+    }
+
+    /**
+     * @param $href `href` attribute.
+     *
+     * @param $attrs Further attributes. $href overrides `$attrs['href']`.
      *
      * @param $path Local path, defaults to $href without query part.
      */
@@ -28,38 +65,27 @@ class Link extends AbstractSpecificElement
         ?array $attrs = null,
         $path = null
     ): self {
-        /** Call LinkTrait::augmentLocalUrl(). */
-        $href = static::augmentLocalUrl($href, $path);
+        /** Call augmentLocalUrl(). */
+        static::augmentLocalUrl($href, $path);
 
-        /** Determine media type from filename unless the type is set in
-         *  `$attrs`. */
+        /** Determine media type from the file unless the type is set in
+         *  $attrs. */
         if (!isset($attrs['type'])) {
             $attrs =
             [ 'type' => MediaType::newFromFilename($path) ] + (array)$attrs;
         }
 
-        return new self($href, $attrs);
+        return new static($href, $attrs);
     }
 
     /**
      * @param $href `href` attribute.
      *
-     * @param $attrs Further attributes. If `$attrs['rel']` is not set and
-     * a class constant REL is defiend, `$attrs['rel']` is set to
-     * static::REL. If $href is set, it overrides `$attrs['href']`.
+     * @param $attrs Further attributes. If $href is set, it overrides
+     * `$attrs['href']`.
      */
     public function __construct(?string $href, ?array $attrs = null)
     {
-        $attrs = (array)$attrs;
-
-        if (!isset($attrs['rel']) && defined('static::REL')) {
-            $attrs['rel'] = static::REL;
-        }
-
-        if (isset($href)) {
-            $attrs['href'] = $href;
-        }
-
-        return parent::__construct(null, $attrs);
+        return parent::__construct(null, compact('href') + (array)$attrs);
     }
 }

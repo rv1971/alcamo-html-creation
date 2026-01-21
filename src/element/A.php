@@ -5,7 +5,7 @@ namespace alcamo\html_creation\element;
 /**
  * @brief HTML element \<a>
  *
- * @date Last reviewed 2021-06-15
+ * @date Last reviewed 2026-01-20
  */
 class A extends AbstractSpecificElement
 {
@@ -23,7 +23,6 @@ class A extends AbstractSpecificElement
         $content = null,
         ?array $attrs = null
     ): self {
-        return
-        new self($content ?? $href, compact('href') + (array)$attrs);
+        return new static($content ?? $href, compact('href') + (array)$attrs);
     }
 }

@@ -7,13 +7,18 @@ class Select extends AbstractOptionList
     public const TAG_NAME = "select";
 
     /**
-     * @brief Create from sequence of values
+     * @brief Create from a sequence of values
      *
      * @param @name Value for `name` attribute
      *
-     * @copydetails AbstractOptionList::createOptionArrayFromSequence()
+     * @param $values Values to become the option values
      *
-     * @param @attrs Further attributes.
+     * @param $compareTo Set the attribute `checked` if the value matches
+     * $compareTo using
+     * alcamo::html_creation::element::AbstractCheckableInput::matches().
+     *
+     * @param $attrs Further attributes of the \<select> element. $name
+     * overrides `$attrs['name']`.
      */
     public static function newFromValueSequence(
         $name,
@@ -21,10 +26,9 @@ class Select extends AbstractOptionList
         $compareTo = null,
         ?array $attrs = null
     ) {
-        return new self(
-            $name,
-            self::createOptionArrayFromSequence($values, $compareTo),
-            $attrs
+        return new static(
+            self::createOptionsFromValues($values, $compareTo),
+            compact('name') + (array)$attrs
         );
     }
 
@@ -33,9 +37,15 @@ class Select extends AbstractOptionList
      *
      * @param @name Value for `name` attribute
      *
-     * @copydetails AbstractOptionList::createOptionArrayFromMap()
+     * @param $map Map of values (which become the option values) to labels
+     * (which become the option contents).
      *
-     * @param @attrs Further attributes.
+     * @param $compareTo Set the attribute `checked` if the value matches
+     * $compareTo using
+     * alcamo::html_creation::element::AbstractCheckableInput::matches().
+     *
+     * @param $attrs Further attributes of the \<select> element. $name
+     * overrides `$attrs['name']`.
      */
     public static function newFromMap(
         $name,
@@ -43,21 +53,22 @@ class Select extends AbstractOptionList
         $compareTo = null,
         ?array $attrs = null
     ) {
-        return new self(
-            $name,
-            self::createOptionArrayFromMap($values, $compareTo),
-            $attrs
+        return new static(
+            self::createOptionsFromMap($values, $compareTo),
+            compact('name') + (array)$attrs
         );
     }
 
     /**
      * If $name ends with `[]`, the attribute `multiple` is automatically set.
      */
-    public function __construct($name, $content, ?array $attrs = null)
+    public function __construct($content, ?array $attrs = null)
     {
-        $attrs = compact('name') + (array)$attrs;
-
-        if (isset($name) && substr($name, -2) == '[]') {
+        if (
+            isset($attrs)
+                && isset($attrs['name'])
+                && substr($attrs['name'], -2) == '[]'
+        ) {
             $attrs['multiple'] = true;
         }
 

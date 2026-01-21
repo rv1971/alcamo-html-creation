@@ -7,46 +7,54 @@ use alcamo\rdfa\MediaType;
 /**
  * @brief HTML element \<link> referring to an icon
  *
- * @date Last reviewed 2021-06-16
+ * @date Last reviewed 2026-01-21
  */
 class Icon extends Link
 {
-    public const REL = 'icon';
+    public const DEFAULT_ATTRS = [ 'rel' => 'icon' ];
 
-    /// @copydoc Link::newFromLocalUrl()
+    /**
+     * @param $href `href` attribute.
+     *
+     * @param $attrs Further attributes. $href overrides `$attrs['href']`.
+     *
+     * @param $path Local path, defaults to $href without query part.
+     */
     public static function newFromLocalUrl(
         string $href,
         ?array $attrs = null,
         $path = null
     ): Link {
-        /** Call LinkTrait::augmentLocalUrl(). */
-        $href = static::augmentLocalUrl($href, $path);
+        /** Call
+         *  alcamo::html_creation::element::Link::augmentLocalUrl(). */
+        static::augmentLocalUrl($href, $path);
 
-        /** Determine media type from filename unless the type is set in
-         *  `$attrs`. */
-        $type =
-            isset($attrs['type'])
-            ? ($attrs['type'] instanceof MediaType
-               ? $attrs['type']
-               : MediaType::newFromString($attrs['type']))
-            : MediaType::newFromFilename($path);
+        /** Determine media type from the file unless the type is set in
+         *  $attrs. */
+        if (isset($attrs['type'])) {
+            $type = $attrs['type'] instanceof MediaType
+                ? $attrs['type']
+                : MediaType::newFromString($attrs['type']);
+        } else {
+            $type = MediaType::newFromFilename($path);
 
-        if ($type->getType() == 'image') {
-            $computedAttrs = [ 'type' => $type ];
+            $attrs['type'] = $type;
+        }
 
+        /** Determine size information from the file unless the type is set in
+         *  $attrs. */
+        if (!isset($attrs['sizes']) && $type->getType() == 'image') {
             if ($type->getSubtype() == 'svg+xml') {
-                $computedAttrs['sizes'] = 'any';
+                $attrs['sizes'] = 'any';
             } else {
                 $a = getimagesize($path);
 
                 if ($a !== false) {
-                    $computedAttrs['sizes'] = "{$a[0]}x{$a[1]}";
+                    $attrs['sizes'] = "{$a[0]}x{$a[1]}";
                 }
             }
-
-            $attrs = $computedAttrs + (array)$attrs;
         }
 
-        return new self($href, $attrs);
+        return new static($href, $attrs);
     }
 }

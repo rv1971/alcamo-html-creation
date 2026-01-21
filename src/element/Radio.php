@@ -5,41 +5,31 @@ namespace alcamo\html_creation\element;
 /**
  * @brief HTML element \<input> of type `radio`
  *
- * @date Last reviewed 2021-06-16
+ * @date Last reviewed 2026-01-21
  */
-class Radio extends Input
+class Radio extends AbstractCheckableInput
 {
-    public const TYPE = 'radio';
+    public const DEFAULT_ATTRS = [ 'type' => 'radio' ];
 
     /**
-     * @param $name `name` attribute.
+     * @brief Create an array of Label objects containing each a radio button
+     * and a text label, from a sequence of values
      *
-     * @param $value `value` attribute.
+     * @param $name `name` attribute for each radio button.
      *
-     * @param $compareTo If $value is identical to $compareTo (using the ===
-     * operator), set the attribute `checked`.
+     * @param $values Values to become the `value` attributes of the radio
+     * buttons and the corresponding text label.
      *
-     * @param $attrs Further attributes. If `$attrs['type']` is not set and
-     * a class constant TYPE is defiend, `$attrs['type']` is set to
-     * static::TYPE. $name and $value override `$attrs['name']` and
-     * `$attrs['value']`.
+     * @param $compareTo Set the attribute `checked` if the value matches
+     * $compareTo using
+     * alcamo::html_creation::element::AbstractCheckableInput::matches().
+     *
+     * @param $attrs Further attributes for the radio buttons. $name and
+     * value override ``$attrs['name']`` and ``$attrs['value']``.
+     *
+     * @return array indexed by values.
      */
-    public static function newFromNameValueCompare(
-        $name,
-        $value,
-        $compareTo,
-        ?array $attrs = null
-    ): self {
-        $attrs = compact('name', 'value') + (array)$attrs;
-
-        if (isset($compareTo)) {
-            $attrs['checked'] = $value == $compareTo;
-        }
-
-        return new static($attrs);
-    }
-
-    public static function createLabeledRadiosFromValueSequence(
+    public static function createLabeledRadiosFromValues(
         string $name,
         iterable $values,
         $compareTo = null,
@@ -57,7 +47,7 @@ class Radio extends Input
                             $compareTo,
                             $attrs
                         ),
-                        (string)$value
+                        $value
                     ]
                 );
             }
@@ -66,20 +56,38 @@ class Radio extends Input
         return $radios;
     }
 
+    /**
+     * @brief Create an array of Label objects containing each a radio button
+     * and a text label, from a map of values to labels
+     *
+     * @param $name `name` attribute for each radio button.
+     *
+     * @param $map Map of values (which become the `value` attributes of the
+     * radio buttons) to labels (which become the corresponding text labels).
+     *
+     * @param $compareTo Set the attribute `checked` if the value matches
+     * $compareTo using
+     * alcamo::html_creation::element::AbstractCheckableInput::matches().
+     *
+     * @param $attrs Further attributes for the radio buttons. $name and
+     * value override ``$attrs['name']`` and ``$attrs['value']``.
+     *
+     * @return array indexed by values.
+     */
     public static function createLabeledRadiosFromMap(
         string $name,
-        iterable $values,
+        iterable $map,
         $compareTo = null,
         ?array $attrs = null
     ): array {
         $radios = [];
 
-        foreach ($values as $value => $label) {
-            $radios[(string)$value] = new Label(
+        foreach ($map as $value => $label) {
+            $radios[$value] = new Label(
                 [
                     static::newFromNameValueCompare(
                         $name,
-                        (string)$value,
+                        $value,
                         $compareTo,
                         $attrs
                     ),

@@ -17,8 +17,8 @@ class OlTest extends TestCase
         $content,
         $attrs,
         $expectedString
-    ) {
-        $ol = new Ol($content, $attrs);
+    ): void {
+        $ol = Ol::newFromItems($content, $attrs);
 
         $this->assertSame('ol', $ol->getTagName());
 
@@ -27,28 +27,28 @@ class OlTest extends TestCase
         $this->assertEquals($expectedString, (string)$ol);
     }
 
-    public function basicsProvider()
+    public function basicsProvider(): array
     {
         return [
-        'empty' => [ [], null, '<ol></ol>' ],
+            'empty' => [ [], null, '<ol></ol>' ],
 
-        'array' => [
-            [ 'FOO', null, new Li(42), new B('BAR') ],
-        null,
-        '<ol><li>FOO</li><li>42</li><li><b>BAR</b></li></ol>',
-        ],
+            'array' => [
+                [ 'FOO', null, new Li(42), new B('BAR') ],
+                null,
+                '<ol><li>FOO</li><li>42</li><li><b>BAR</b></li></ol>',
+            ],
 
-        'Map' => [
-        new Map([
-          43,
-          new Script(null, [ 'src' => 'foo.js' ]),
-          new Template('Lorem ipsum'),
-          new Li('baz', [ 'id' => 'qux' ])
-        ]),
-        [ 'class' => 'important' ],
-        '<ol class="important"><li>43</li><script src="foo.js"></script>'
-        . '<template>Lorem ipsum</template><li id="qux">baz</li></ol>',
-        ],
+            'Map' => [
+                new Map([
+                    43,
+                    new Script(null, [ 'src' => 'foo.js' ]),
+                    new Template('Lorem ipsum'),
+                    new Li('baz', [ 'id' => 'qux' ])
+                ]),
+                [ 'class' => 'important' ],
+                '<ol class="important"><li>43</li><script src="foo.js"></script>'
+                . '<template>Lorem ipsum</template><li id="qux">baz</li></ol>',
+            ],
         ];
     }
 }

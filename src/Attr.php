@@ -2,24 +2,26 @@
 
 namespace alcamo\html_creation;
 
-use alcamo\xml_creation\Attribute as XmlAttribute;
-use alcamo\xml_creation\TokenList;
+use alcamo\xml_creation\Attr as XmlAttr;
 
 /**
  * @brief HTML attribute that can be serialized to HTML text
  *
- * @date Last reviewed 2021-06-15
+ * @date Last reviewed 2026-01-20
  */
-class Attribute extends XmlAttribute
+class Attr extends XmlAttr
 {
-    /// @copydoc alcamo::xml_creation::NodeInterface::__toString()
+    /**
+     * @copydoc alcamo::xml_creation::NodeInterface::__toString()
+     */
     public function __toString(): string
     {
         if (is_bool($this->content_)) {
           /**
            * If content is boolean:
-           * - render `true` as attribute name (e.g. `checked="checked"`)
-           * - render `false` as empty string
+           * - render `true` as attribute with its name as its content
+           * (e.g. `checked="checked"`)
+           * - render `false` as empty string, i.e. omit the attribute
            */
             return $this->content_ ? "$this->name_=\"$this->name_\"" : '';
         } else {

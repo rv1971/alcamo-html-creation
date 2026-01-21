@@ -5,31 +5,34 @@ namespace alcamo\html_creation\element;
 /**
  * @brief HTML element \<optgroup>
  *
- * @date Last reviewed 2021-06-16
+ * @date Last reviewed 2026-01-21
  */
 class Optgroup extends AbstractOptionList
 {
     public const TAG_NAME = "optgroup";
 
     /**
-     * @brief Create from sequence of values
+     * @brief Create from a sequence of values
      *
      * @param $label Group label
      *
-     * @copydetails AbstractOptionList::createOptionArrayFromSequence()
+     * @param $values Values to become the option values
      *
-     * @param $attrs Further attributes.
+     * @param $compareTo Set the attribute `checked` if the value matches
+     * $compareTo using
+     * alcamo::html_creation::element::AbstractCheckableInput::matches().
+     *
+     * @param $attrs Further attributes of the \<optgroup> element.
      */
-    public static function newFromValueSequence(
+    public static function newFromValues(
         $label,
         iterable $values,
         $compareTo = null,
         ?array $attrs = null
     ) {
-        return new self(
-            $label,
-            self::createOptionArrayFromSequence($values, $compareTo),
-            $attrs
+        return new static(
+            static::createOptionsFromValues($values, $compareTo),
+            compact('label') + (array)$attrs
         );
     }
 
@@ -38,25 +41,24 @@ class Optgroup extends AbstractOptionList
      *
      * @param $label Group label
      *
-     * @copydetails AbstractOptionList::createOptionArrayFromMap()
+     * @param $map Map of values (which become the option values) to labels
+     * (which become the option contents).
      *
-     * @param $attrs Further attributes.
+     * @param $compareTo Set the attribute `checked` if the value matches
+     * $compareTo using
+     * alcamo::html_creation::element::AbstractCheckableInput::matches().
+     *
+     * @param $attrs Further attributes of the \<optgroup> element.
      */
     public static function newFromMap(
         $label,
-        iterable $values,
+        iterable $map,
         $compareTo = null,
         ?array $attrs = null
     ) {
-        return new self(
-            $label,
-            self::createOptionArrayFromMap($values, $compareTo),
-            $attrs
+        return new static(
+            self::createOptionsFromMap($map, $compareTo),
+            compact('label') + (array)$attrs
         );
-    }
-
-    public function __construct($label, $content, ?array $attrs = null)
-    {
-        parent::__construct($content, compact('label') + (array)$attrs);
     }
 }

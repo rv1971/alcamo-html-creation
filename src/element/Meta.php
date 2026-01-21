@@ -5,7 +5,7 @@ namespace alcamo\html_creation\element;
 /**
  * @brief HTML element \<meta>
  *
- * @date Last reviewed 2021-06-15
+ * @date Last reviewed 2026-01-20
  */
 class Meta extends AbstractSpecificElement
 {

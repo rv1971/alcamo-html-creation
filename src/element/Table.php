@@ -7,7 +7,7 @@ use alcamo\xml_creation\Raw;
 /**
  * @brief HTML element \<table>
  *
- * @date Last reviewed 2021-06-16
+ * @date Last reviewed 2026-01-21
  */
 class Table extends AbstractRowgroupElement
 {
@@ -28,8 +28,8 @@ class Table extends AbstractRowgroupElement
         $thead = null,
         $tbody = null,
         $tfoot = null,
-        ?iterable $attrs = null
-    ) {
+        ?array $attrs = null
+    ): self {
         $content = [];
 
         switch (true) {
@@ -83,6 +83,6 @@ class Table extends AbstractRowgroupElement
                 $content[] = Tfoot::newFromCellsIterable($tfoot);
         }
 
-        return new self($content, $attrs);
+        return new static($content, $attrs);
     }
 }

@@ -7,5 +7,5 @@ namespace alcamo\html_creation\element;
  */
 class Hidden extends Input
 {
-    public const TYPE = 'hidden';
+    public const DEFAULT_ATTRS = [ 'type' => 'hidden' ];
 }

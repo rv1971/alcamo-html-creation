@@ -11,6 +11,5 @@ class Thead extends AbstractRowgroupElement
 {
     public const TAG_NAME = "thead";
 
-    /// @copydoc AbstractRowgroupElement::CELL_CLASS
-    public const CELL_CLASS = Th::class;
+    public const DEFAULT_CELL_CLASS = Th::class;
 }

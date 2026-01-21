@@ -7,5 +7,5 @@ namespace alcamo\html_creation\element;
  */
 class NumberInput extends Input
 {
-    public const TYPE = 'number';
+    public const DEFAULT_ATTRS = [ 'type' => 'number' ];
 }

@@ -5,7 +5,7 @@ namespace alcamo\html_creation\element;
 /**
  * @brief HTML element \<option>
  *
- * @date Last reviewed 2021-06-16
+ * @date Last reviewed 2026-01-21
  */
 class Option extends AbstractSpecificElement
 {
@@ -16,15 +16,12 @@ class Option extends AbstractSpecificElement
      *
      * @param $content `content` attribute. Defaults to $value.
      *
-     * @param $compareTo Set the attribute `checked` if $value is is contained
-     *  in $compareTo (see below). This is checked as follows:
-     * - Call `$compareTo->contains($value)` if this method is available.
-     * - Else, if $compareTo is an array, check whether is contains $value.
-     * - Else, check whether $value is equal to $compareTo using the ==
-     *   operator.
+     * @param $compareTo Set the attribute `checked` if $value matches
+     * $compareTo using
+     * alcamo::html_creation::element::AbstractCheckableInput::matches().
      *
-     * Set the attribute `checked` if $compareTo is `null` and value is the
-     * empty string. This allows to automatically select a default entry
+     * Also set the attribute `checked` if $compareTo is `null` and value is
+     * the empty string. This allows to automatically select a default entry
      * (which may mean "all" or "none") if nothing has been explicitely
      * selected.
      *
@@ -44,18 +41,8 @@ class Option extends AbstractSpecificElement
             : (array)$attrs;
 
         if (isset($compareTo)) {
-            switch (true) {
-                case is_callable([ $compareTo, 'contains' ]):
-                    $attrs['selected'] = $compareTo->contains($value);
-                    break;
-
-                case is_array($compareTo):
-                    $attrs['selected'] = in_array($value, $compareTo, true);
-                    break;
-
-                default:
-                    $attrs['selected'] = $value == $compareTo;
-            }
+            $attrs['selected'] =
+                AbstractCheckableInput::matches($value, $compareTo);
         } elseif ($value === '') {
             $attrs['selected'] = true;
         }

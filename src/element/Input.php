@@ -7,10 +7,7 @@ use alcamo\exception\InvalidEnumerator;
 /**
  * @brief HTML element \<input>
  *
- * Derived classes my define a class constant TYPE which becomes the default
- * value for the `type` attribute.
- *
- * @date Last reviewed 2021-06-16
+ * @date Last reviewed 2026-01-21
  */
 class Input extends AbstractSpecificElement
 {
@@ -47,10 +44,8 @@ class Input extends AbstractSpecificElement
      *
      * @param $value `value` attribute.
      *
-     * @param $attrs Further attributes. If ``$attrs['type']`` is not set and
-     * a class constant TYPE is defiend, ``$attrs['type']`` is set to
-     * static::TYPE. $name and $value override ``$attrs['name']`` and
-     * ``$attrs['value']``.
+     * @param $attrs Further attributes. $name and $value override
+     * ``$attrs['name']`` and ``$attrs['value']``.
      */
     public static function newFromNameValue(
         string $name,
@@ -66,11 +61,7 @@ class Input extends AbstractSpecificElement
      */
     public function __construct(array $attrs)
     {
-        $attrs = (array)$attrs;
-
-        if (!isset($attrs['type']) && defined('static::TYPE')) {
-            $attrs['type'] = static::TYPE;
-        }
+        parent::__construct(null, $attrs);
 
         if (!in_array($attrs['type'], static::TYPES)) {
             /** @throw alcamo::exception::InvalidEnumerator if the value for
@@ -83,7 +74,5 @@ class Input extends AbstractSpecificElement
                 ]
             );
         }
-
-        parent::__construct(null, $attrs);
     }
 }

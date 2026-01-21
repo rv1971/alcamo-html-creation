@@ -14,14 +14,14 @@ use alcamo\xml_creation\TokenList;
 /**
  * @brief HTML element that can be serialized to HTML text
  *
- * @date Last reviewed 2021-06-15
+ * @date Last reviewed 2026-01-20
  */
 class Element extends XmlElement
 {
     /// @copydoc alcamo::xml_creation::Element::ATTR_CLASS
-    public const ATTR_CLASS = Attribute::class;
+    public const ATTR_CLASS = Attr::class;
 
-    /// Call XmlElement::__construct/(), then sanitizeAttrs()
+    /// Call XmlElement::__construct(), then sanitizeAttrs()
     public function __construct(
         string $tagName,
         ?iterable $attrs = null,
@@ -32,7 +32,13 @@ class Element extends XmlElement
         $this->sanitizeAttrs();
     }
 
-    /// Ensure the `class` attribute is always present and is a TokenList
+    /**
+     * @brief Ensure the `class` attribute is always present and is a
+     * TokenList
+     *
+     * This makes it much easier to add classes. If the TokenList remains
+     * empty, the attribute will be omitted upon serialization.
+     */
     protected function sanitizeAttrs()
     {
         if (!isset($this->data_['class'])) {

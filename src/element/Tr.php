@@ -7,25 +7,29 @@ use alcamo\xml_creation\Raw;
 /**
  * @brief HTML element \<tr>
  *
- * @date Last reviewed 2021-06-15
+ * @date Last reviewed 2026-01-21
  */
 class Tr extends AbstractSpecificElement
 {
     public const TAG_NAME = "tr";
 
+    /// Default class to wrap cell content into
+    public const DEFAULT_CELL_CLASS = Td::class;
+
     /**
      * @brief Wrap each non-`null` item into a cell unless it is an element
      * allowed within \<tr>.
      *
-     * @param $cellClass Class to wrap items into, defaults to Td
+     * @param $cellClass Class to wrap items into, defaults to
+     * alcamo::html_creation::element::Tr::DEFAULT_CELL_CLASS.
      */
-    public function __construct(
+    public static function newFromItems(
         iterable $items,
-        ?iterable $attrs = null,
-        string $cellClass = null
+        ?array $attrs = null,
+        ?string $cellClass = null
     ) {
         if (!isset($cellClass)) {
-            $cellClass = Td::class;
+            $cellClass = static::DEFAULT_CELL_CLASS;
         }
 
         $content = [];
@@ -41,6 +45,6 @@ class Tr extends AbstractSpecificElement
             }
         }
 
-        parent::__construct($content, $attrs);
+        return new static($content, $attrs);
     }
 }
