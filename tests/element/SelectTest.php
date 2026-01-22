@@ -48,7 +48,7 @@ class SelectTest extends TestCase
         [ 'a', 'b', 'c', 'd' ],
         new Set([ 'a', 'd' ]),
         [ 'id' => 'foo' ],
-        '<select name="foo[]" id="foo" multiple="multiple">'
+        '<select id="foo" name="foo[]" multiple="multiple">'
         . '<option selected="selected">a</option>'
         . '<option>b</option>'
         . '<option>c</option>'
@@ -116,7 +116,7 @@ class SelectTest extends TestCase
         ],
         new Set([ 'a', 'd' ]),
         [ 'id' => 'foo' ],
-        '<select name="foo" id="foo">'
+        '<select id="foo" name="foo">'
         . '<option value="a" selected="selected">Ancona</option>'
         . '<option value="b">Bologna</option>'
         . '<option value="c">Cagliari</option>'

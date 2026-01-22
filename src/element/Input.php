@@ -52,7 +52,15 @@ class Input extends AbstractSpecificElement
         $value,
         ?array $attrs = null
     ): self {
-        return new static(compact('name', 'value') + (array)$attrs);
+        if (isset($name)) {
+            $attrs['name'] = $name;
+        }
+
+        if (isset($value)) {
+            $attrs['value'] = $value;
+        }
+
+        return new static($attrs);
     }
 
     /**

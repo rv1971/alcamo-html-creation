@@ -54,6 +54,14 @@ class Img extends AbstractSpecificElement
      */
     public function __construct($src, $alt, ?array $attrs = null)
     {
-        parent::__construct(null, compact('src', 'alt') + (array)$attrs);
+        if (isset($src)) {
+            $attrs['src'] = $src;
+        }
+
+        if (isset($alt)) {
+            $attrs['alt'] = $alt;
+        }
+
+        parent::__construct(null, $attrs);
     }
 }

@@ -22,7 +22,9 @@ class ATest extends TestCase
 
         $this->assertInstanceOf(TokenList::class, $a['class']);
 
-        $this->assertSame($href, $a['href']);
+        if (isset($href)) {
+            $this->assertSame($href, $a['href']);
+        }
 
         $this->assertSame($content ?? $href, $a->getContent());
 
@@ -32,19 +34,26 @@ class ATest extends TestCase
     public function basicsProvider()
     {
         return [
-        'typical-use' => [
-        'qux.html',
-        null,
-        null,
-        '<a href="qux.html">qux.html</a>'
-        ],
+            'typical-use' => [
+                'qux.html',
+                null,
+                null,
+                '<a href="qux.html">qux.html</a>'
+            ],
 
-        'with-content' => [
-        'quux.php',
-        'QUUX',
-        [ 'rel' => 'dc:isPartOf' ],
-        '<a href="quux.php" rel="dc:isPartOf">QUUX</a>'
-        ]
+            'with-content' => [
+                'quux.php',
+                'QUUX',
+                [ 'rel' => 'dc:isPartOf' ],
+                '<a rel="dc:isPartOf" href="quux.php">QUUX</a>'
+            ],
+
+            'without-extra-href' => [
+                null,
+                'CORGE',
+                [ 'href' => 'corge.html' ],
+                '<a href="corge.html">CORGE</a>'
+            ]
         ];
     }
 }

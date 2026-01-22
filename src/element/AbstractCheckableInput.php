@@ -48,7 +48,13 @@ abstract class AbstractCheckableInput extends Input
         $compareTo = null,
         ?array $attrs = null
     ): self {
-        $attrs = compact('name', 'value') + (array)$attrs;
+        if (isset($name)) {
+            $attrs['name'] = $name;
+        }
+
+        if (isset($value)) {
+            $attrs['value'] = $value;
+        }
 
         if (isset($compareTo)) {
             $attrs['checked'] = static::matches($value, $compareTo);

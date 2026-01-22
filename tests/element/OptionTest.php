@@ -37,93 +37,93 @@ class OptionTest extends TestCase
     public function constructProvider()
     {
         return [
-        'no-comparison' => [
-        'bar',
-        null,
-        null,
-        [ 'id' => 'BAR' ],
-        '<option id="BAR">bar</option>'
-        ],
+            'no-comparison' => [
+                'bar',
+                null,
+                null,
+                [ 'id' => 'BAR' ],
+                '<option id="BAR">bar</option>'
+            ],
 
-        'no-value' => [
-        null,
-        'Bar',
-        null,
-        [ 'id' => 'BAR' ],
-        '<option id="BAR">Bar</option>'
-        ],
+            'no-value' => [
+                null,
+                'Bar',
+                null,
+                [ 'id' => 'BAR' ],
+                '<option id="BAR">Bar</option>'
+            ],
 
-        'empty-value' => [
-        '',
-        'Bar',
-        null,
-        [ 'id' => 'BAR' ],
-        '<option value="" id="BAR" selected="selected">Bar</option>'
-        ],
+            'empty-value' => [
+                '',
+                'Bar',
+                null,
+                [ 'id' => 'BAR' ],
+                '<option id="BAR" value="" selected="selected">Bar</option>'
+            ],
 
-        'unselected-string' => [
-        'bar',
-        'foo',
-        'barr',
-        [ 'id' => 'BAR' ],
-        '<option value="bar" id="BAR">foo</option>'
-        ],
+            'unselected-string' => [
+                'bar',
+                'foo',
+                'barr',
+                [ 'id' => 'BAR' ],
+                '<option id="BAR" value="bar">foo</option>'
+            ],
 
-        'selected-string' => [
-        42,
-        'baz',
-        42,
-        null,
-        '<option value="42" selected="selected">baz</option>'
-        ],
+            'selected-string' => [
+                42,
+                'baz',
+                42,
+                null,
+                '<option value="42" selected="selected">baz</option>'
+            ],
 
-        'unselected-array' => [
-        'bar',
-        'foo',
-        [ 'barr', 'quuux' ],
-        [ 'id' => 'BAR' ],
-        '<option value="bar" id="BAR">foo</option>'
-        ],
+            'unselected-array' => [
+                'bar',
+                'foo',
+                [ 'barr', 'quuux' ],
+                [ 'id' => 'BAR' ],
+                '<option id="BAR" value="bar">foo</option>'
+            ],
 
-        'selected-array' => [
-        42,
-        'baz',
-        [ 41, 42, 43 ],
-        null,
-        '<option value="42" selected="selected">baz</option>'
-        ],
+            'selected-array' => [
+                42,
+                'baz',
+                [ 41, 42, 43 ],
+                null,
+                '<option value="42" selected="selected">baz</option>'
+            ],
 
-        'unselected-set' => [
-        'bar',
-        'foo',
-        new Set([ 'barr', 'quuux' ]),
-        [ 'id' => 'BAR' ],
-        '<option value="bar" id="BAR">foo</option>'
-        ],
+            'unselected-set' => [
+                'bar',
+                'foo',
+                new Set([ 'barr', 'quuux' ]),
+                [ 'id' => 'BAR' ],
+                '<option id="BAR" value="bar">foo</option>'
+            ],
 
-        'selected-set' => [
-        42,
-        'baz',
-        new Set([ 41, 42, 43 ]),
-        null,
-        '<option value="42" selected="selected">baz</option>'
-        ],
+            'selected-set' => [
+                42,
+                'baz',
+                new Set([ 41, 42, 43 ]),
+                null,
+                '<option value="42" selected="selected">baz</option>'
+            ],
 
-        'unselected-collection' => [
-        'bar',
-        'foo',
-        new Collection([ 'barr', 'quuux' ]),
-        [ 'id' => 'BAR' ],
-        '<option value="bar" id="BAR">foo</option>'
-        ],
+            'unselected-collection' => [
+                'bar',
+                'foo',
+                new Collection([ 'barr', 'quuux' ]),
+                [ 'id' => 'BAR' ],
+                '<option id="BAR" value="bar">foo</option>'
+            ],
 
-        'selected-collection' => [
-        42,
-        'baz',
-        new Collection([ 41, 42, 43 ]),
-        null,
-        '<option value="42" selected="selected">baz</option>'
-        ]
+            'selected-collection' => [
+                42,
+                'baz',
+                new Collection([ 41, 42, 43 ]),
+                null,
+                '<option value="42" selected="selected">baz</option>'
+            ]
         ];
     }
 }

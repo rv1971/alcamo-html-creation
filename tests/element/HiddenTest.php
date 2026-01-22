@@ -15,7 +15,7 @@ class HiddenTest extends TestCase
         $value,
         $attrs,
         $expectedString
-    ) {
+    ): void {
         $hidden = Hidden::newFromNameValue($name, $value, $attrs);
 
         $this->assertSame('input', $hidden->getTagName());
@@ -27,7 +27,7 @@ class HiddenTest extends TestCase
         $this->assertEquals($expectedString, (string)$hidden);
     }
 
-    public function newFromNameValueProvider()
+    public function newFromNameValueProvider(): array
     {
         return [
             'typical-use' => [
@@ -41,7 +41,7 @@ class HiddenTest extends TestCase
                 'foo',
                 'bar',
                 [ 'id' => 'QUX' ],
-                '<input name="foo" value="bar" id="QUX" type="hidden"/>'
+                '<input id="QUX" name="foo" value="bar" type="hidden"/>'
             ]
         ];
     }

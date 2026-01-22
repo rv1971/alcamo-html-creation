@@ -46,7 +46,7 @@ class OptgroupTest extends TestCase
         [ 'a', null, 'b', 'c', 'd' ],
         new Set([ 'a', 'd' ]),
         [ 'id' => 'foo' ],
-        '<optgroup label="Foo" id="foo">'
+        '<optgroup id="foo" label="Foo">'
         . '<option selected="selected">a</option>'
         . '<option>b</option>'
         . '<option>c</option>'
@@ -114,7 +114,7 @@ class OptgroupTest extends TestCase
         ],
         new Set([ 'a', 'd' ]),
         [ 'id' => 'foo' ],
-        '<optgroup label="Foo" id="foo">'
+        '<optgroup id="foo" label="Foo">'
         . '<option value="a" selected="selected">Ancona</option>'
         . '<option value="b">Bologna</option>'
         . '<option value="c">Cagliari</option>'

@@ -26,9 +26,13 @@ class Select extends AbstractOptionList
         $compareTo = null,
         ?array $attrs = null
     ) {
+        if (isset($name)) {
+            $attrs['name'] = $name;
+        }
+
         return new static(
             self::createOptionsFromValues($values, $compareTo),
-            compact('name') + (array)$attrs
+            $attrs
         );
     }
 
@@ -53,9 +57,13 @@ class Select extends AbstractOptionList
         $compareTo = null,
         ?array $attrs = null
     ) {
+        if (isset($name)) {
+            $attrs['name'] = $name;
+        }
+
         return new static(
             self::createOptionsFromMap($values, $compareTo),
-            compact('name') + (array)$attrs
+            $attrs
         );
     }
 

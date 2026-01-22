@@ -87,6 +87,10 @@ class Link extends AbstractSpecificElement
      */
     public function __construct(?string $href, ?array $attrs = null)
     {
-        return parent::__construct(null, compact('href') + (array)$attrs);
+        if (isset($href)) {
+            $attrs['href'] = $href;
+        }
+
+        return parent::__construct(null, $attrs);
     }
 }

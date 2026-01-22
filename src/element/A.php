@@ -23,6 +23,10 @@ class A extends AbstractSpecificElement
         $content = null,
         ?array $attrs = null
     ): self {
-        return new static($content ?? $href, compact('href') + (array)$attrs);
+        if (isset($href)) {
+            $attrs['href'] = $href;
+        }
+
+        return new static($content ?? $href, $attrs);
     }
 }

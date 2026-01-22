@@ -39,10 +39,10 @@ class CheckboxTest extends TestCase
     {
         return [
             'no-comparison' => [
-                'foo',
-                'bar',
                 null,
-                [ 'id' => 'BAR' ],
+                null,
+                null,
+                [ 'name' => 'foo', 'value' => 'bar', 'id' => 'BAR' ],
                 '<input name="foo" value="bar" id="BAR" type="checkbox"/>'
             ],
 
@@ -51,7 +51,7 @@ class CheckboxTest extends TestCase
                 'bar',
                 'barr',
                 [ 'id' => 'BAR' ],
-                '<input name="foo" value="bar" id="BAR" type="checkbox"/>'
+                '<input id="BAR" name="foo" value="bar" type="checkbox"/>'
             ],
 
             'checked-string' => [
@@ -67,7 +67,7 @@ class CheckboxTest extends TestCase
                 'bar',
                 [ 'barr', 'quuux' ],
                 [ 'id' => 'BAR' ],
-                '<input name="foo" value="bar" id="BAR" type="checkbox"/>'
+                '<input id="BAR" name="foo" value="bar" type="checkbox"/>'
             ],
 
             'checked-array' => [
@@ -83,7 +83,7 @@ class CheckboxTest extends TestCase
                 'bar',
                 new Set([ 'barr', 'quuux' ]),
                 [ 'id' => 'BAR' ],
-                '<input name="foo" value="bar" id="BAR" type="checkbox"/>'
+                '<input id="BAR" name="foo" value="bar" type="checkbox"/>'
             ],
 
             'checked-set' => [
@@ -99,7 +99,7 @@ class CheckboxTest extends TestCase
                 'bar',
                 new Collection([ 'barr', 'quuux' ]),
                 [ 'id' => 'BAR' ],
-                '<input name="foo" value="bar" id="BAR" type="checkbox"/>'
+                '<input id="BAR" name="foo" value="bar" type="checkbox"/>'
             ],
 
             'checked-collection' => [

@@ -41,7 +41,7 @@ class RadioTest extends TestCase
                 'bar',
                 null,
                 [ 'id' => 'BAR' ],
-                '<input name="foo" value="bar" id="BAR" type="radio"/>'
+                '<input id="BAR" name="foo" value="bar" type="radio"/>'
             ],
 
             'unchecked' => [
@@ -49,7 +49,7 @@ class RadioTest extends TestCase
                 'bar',
                 'barr',
                 [ 'id' => 'BAR' ],
-                '<input name="foo" value="bar" id="BAR" type="radio"/>'
+                '<input id="BAR" name="foo" value="bar" type="radio"/>'
             ],
 
             'checked' => [
@@ -90,9 +90,9 @@ class RadioTest extends TestCase
                 [ 'bar', null, 'baz', 'qux' ],
                 'baz',
                 [ 'class' => 'corge' ],
-                '<label><input name="foo" value="bar" class="corge" type="radio"/>bar</label>'
-                . '<label><input name="foo" value="baz" class="corge" checked="checked" type="radio"/>baz</label>'
-                . '<label><input name="foo" value="qux" class="corge" type="radio"/>qux</label>'
+                '<label><input class="corge" name="foo" value="bar" type="radio"/>bar</label>'
+                . '<label><input class="corge" name="foo" value="baz" checked="checked" type="radio"/>baz</label>'
+                . '<label><input class="corge" name="foo" value="qux" type="radio"/>qux</label>'
             ]
         ];
     }
@@ -125,8 +125,8 @@ class RadioTest extends TestCase
                 [ 'l' => 'Lorem', 'i' => 'ipsum' ],
                 'l',
                 [ 'class' => 'loremipsum' ],
-                '<label><input name="x" value="l" class="loremipsum" checked="checked" type="radio"/>Lorem</label>'
-                . '<label><input name="x" value="i" class="loremipsum" type="radio"/>ipsum</label>'
+                '<label><input class="loremipsum" name="x" value="l" checked="checked" type="radio"/>Lorem</label>'
+                . '<label><input class="loremipsum" name="x" value="i" type="radio"/>ipsum</label>'
             ]
         ];
     }

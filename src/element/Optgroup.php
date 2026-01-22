@@ -30,9 +30,13 @@ class Optgroup extends AbstractOptionList
         $compareTo = null,
         ?array $attrs = null
     ) {
+        if (isset($label)) {
+            $attrs['label'] = $label;
+        }
+
         return new static(
             static::createOptionsFromValues($values, $compareTo),
-            compact('label') + (array)$attrs
+            $attrs
         );
     }
 
@@ -56,9 +60,10 @@ class Optgroup extends AbstractOptionList
         $compareTo = null,
         ?array $attrs = null
     ) {
-        return new static(
-            self::createOptionsFromMap($map, $compareTo),
-            compact('label') + (array)$attrs
-        );
+        if (isset($label)) {
+            $attrs['label'] = $label;
+        }
+
+        return new static(self::createOptionsFromMap($map, $compareTo), $attrs);
     }
 }

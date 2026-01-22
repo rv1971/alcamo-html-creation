@@ -34,7 +34,7 @@ class LinkTest extends TestCase
             'typical-use' => [
                 'foo.css',
                 [ 'rel' => 'stylesheet', 'type' => 'text/css' ],
-                '<link href="foo.css" rel="stylesheet" type="text/css"/>'
+                '<link rel="stylesheet" type="text/css" href="foo.css"/>'
             ],
 
             'override-attrs' => [
@@ -78,30 +78,30 @@ class LinkTest extends TestCase
                 "${baseDir}alcamo.css",
                 [ 'rel' => 'stylesheet', 'disable' => true ],
                 null,
-                "<link href=\"${baseDir}alcamo.css?m=$mCss\" "
-                . "type=\"text/css; charset=&quot;us-ascii&quot;\" "
-                    . "rel=\"stylesheet\" disable=\"disable\"/>"
+                "<link type=\"text/css; charset=&quot;us-ascii&quot;\" "
+                    . "rel=\"stylesheet\" disable=\"disable\" "
+                    . "href=\"${baseDir}alcamo.css?m=$mCss\"/>"
             ],
             'json' => [
                 "/foo.json?baz=qux",
                 [ 'id' => 'FOO', 'rel' => 'manifest' ],
                 "${baseDir}foo.json",
-                "<link href=\"/foo.json?baz=qux&amp;m=$mJson\" "
-                . "type=\"application/json\" id=\"FOO\" rel=\"manifest\"/>"
+                "<link type=\"application/json\" id=\"FOO\" rel=\"manifest\" "
+                . "href=\"/foo.json?baz=qux&amp;m=$mJson\"/>"
             ],
             'explicit-type-and-modtime' => [
                 "/foo.json?m=19700101000000",
                 [ 'rel' => 'dc:isVersionOf', 'type' => 'application/x-quux' ],
                 "${baseDir}foo.json",
-                "<link href=\"/foo.json?m=19700101000000\" "
-                . "rel=\"dc:isVersionOf\" type=\"application/x-quux\"/>"
+                "<link rel=\"dc:isVersionOf\" type=\"application/x-quux\" "
+                . "href=\"/foo.json?m=19700101000000\"/>"
             ],
             'explicit-modtime-2' => [
                 "/foo.json?bar=foo&m=19700101000000",
                 [ 'rel' => 'dc:isPartOf' ],
                 "${baseDir}foo.json",
-                "<link href=\"/foo.json?bar=foo&amp;m=19700101000000\" "
-                . "type=\"application/json\" rel=\"dc:isPartOf\"/>"
+                "<link type=\"application/json\" rel=\"dc:isPartOf\" "
+                . "href=\"/foo.json?bar=foo&amp;m=19700101000000\"/>"
             ]
         ];
     }
