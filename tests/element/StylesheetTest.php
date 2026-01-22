@@ -75,7 +75,6 @@ class StylesheetTest extends TestCase
                 [ 'disable' => true ],
                 null,
                 "<link href=\"${baseDir}alcamo.css?m=$mCss\" "
-                . "type=\"text/css; charset=&quot;us-ascii&quot;\" "
                     . "disable=\"disable\" rel=\"stylesheet\"/>"
             ]
         ];
