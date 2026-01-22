@@ -19,7 +19,7 @@ use alcamo\html_creation\Element;
 abstract class AbstractSpecificElement extends Element
 {
     /// Default attributes to add if not defined
-     public const DEFAULT_ATTRS = [];
+    public const DEFAULT_ATTRS = [];
 
     public function __construct($content = null, ?array $attrs = null)
     {

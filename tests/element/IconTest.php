@@ -36,7 +36,7 @@ class IconTest extends TestCase
             'typical-use' => [
                 'quux.png',
                 [ 'type' => 'image/png' ],
-                '<link type="image/png" rel="icon" href="quux.png"/>'
+                '<link href="quux.png" type="image/png" rel="icon"/>'
             ]
         ];
     }
@@ -79,47 +79,47 @@ class IconTest extends TestCase
                 "${baseDir}alcamo-16.png",
                 null,
                 null,
-                "<link type=\"image/png\" sizes=\"16x16\" rel=\"icon\" href=\"${baseDir}alcamo-16.png?m=$m16\"/>"
+                "<link href=\"${baseDir}alcamo-16.png?m=$m16\" type=\"image/png\" sizes=\"16x16\" rel=\"icon\"/>"
             ],
 
             'png32' => [
                 "${baseDir}alcamo-32.png",
                 [ 'id' => 'BAZ' ],
                 null,
-                "<link type=\"image/png\" sizes=\"32x32\" id=\"BAZ\" "
-                . "rel=\"icon\" href=\"${baseDir}alcamo-32.png?m=$m32\"/>"
+                "<link href=\"${baseDir}alcamo-32.png?m=$m32\" "
+                . "id=\"BAZ\" type=\"image/png\" sizes=\"32x32\" rel=\"icon\"/>"
             ],
 
             'jpeg' => [
                 "/icons/alcamo-16.jpeg",
                 [ 'rel' => 'apple-touch-icon' ],
                 "${baseDir}alcamo-16.jpeg",
-                "<link type=\"image/jpeg\" sizes=\"16x16\" "
-                . "rel=\"apple-touch-icon\" href=\"/icons/alcamo-16.jpeg?m=$mJpeg\"/>"
+                "<link href=\"/icons/alcamo-16.jpeg?m=$mJpeg\" "
+                . "rel=\"apple-touch-icon\" type=\"image/jpeg\" sizes=\"16x16\"/>"
             ],
 
             'svg' => [
                 "${baseDir}alcamo.svg",
                 null,
                 null,
-                "<link type=\"image/svg+xml\" sizes=\"any\" "
-                . "rel=\"icon\" href=\"${baseDir}alcamo.svg?m=$mSvg\"/>"
+                "<link href=\"${baseDir}alcamo.svg?m=$mSvg\" "
+                . "type=\"image/svg+xml\" sizes=\"any\" rel=\"icon\"/>"
             ],
 
             'ico' => [
                 "${baseDir}alcamo.ico",
                 null,
                 null,
-                "<link type=\"image/vnd.microsoft.icon\" sizes=\"64x64\" "
-                . "rel=\"icon\" href=\"${baseDir}alcamo.ico?m=$mIco\"/>"
+                "<link href=\"${baseDir}alcamo.ico?m=$mIco\" "
+                . "type=\"image/vnd.microsoft.icon\" sizes=\"64x64\" rel=\"icon\"/>"
             ],
 
             'explicit-type' => [
                 "${baseDir}alcamo-64.png",
                 [ 'type' => 'image/x-foo' ],
                 null,
-                "<link type=\"image/x-foo\" sizes=\"64x64\" rel=\"icon\" "
-                . "href=\"${baseDir}alcamo-64.png?m=$m64\"/>"
+                "<link href=\"${baseDir}alcamo-64.png?m=$m64\" "
+                . "type=\"image/x-foo\" sizes=\"64x64\" rel=\"icon\"/>"
             ]
         ];
     }

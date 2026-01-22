@@ -63,16 +63,16 @@ class RadioTest extends TestCase
     }
 
   /**
-   * @dataProvider newFromValueSequenceProvider
+   * @dataProvider newFromValuesProvider
    */
-    public function testCreateLabeledRadiosFromValueSequence(
+    public function testCreateLabeledRadiosFromValues(
         $name,
         $values,
         $compareTo,
         $attrs,
         $expectedString
     ) {
-        $radios = Radio::createLabeledRadiosFromValueSequence(
+        $radios = Radio::createLabeledRadiosFromValues(
             $name,
             $values,
             $compareTo,
@@ -82,7 +82,7 @@ class RadioTest extends TestCase
         $this->assertEquals($expectedString, (string)new Nodes($radios));
     }
 
-    public function newFromValueSequenceProvider()
+    public function newFromValuesProvider()
     {
         return [
             [

@@ -2,7 +2,6 @@
 
 namespace alcamo\html_creation\element;
 
-use Ds\Map;
 use PHPUnit\Framework\TestCase;
 use alcamo\xml_creation\TokenList;
 
@@ -124,49 +123,49 @@ class TableTest extends TestCase
     public function newFromRowgroupsProvider()
     {
         return [
-        'typical-use' => [
-        [ 'foo', 'bar' ],
-        [
-          [ new Th('f1'), 'b1' ],
-          [ 'f2', 'b2' ]
-        ],
-        null,
-        [ 'id' => 'overview' ],
-        '<table id="overview">'
-        . '<thead><tr><th>foo</th><th>bar</th></tr></thead>'
-        . '<tbody><tr><th>f1</th><td>b1</td></tr><tr><td>f2</td><td>b2</td></tr></tbody>'
-        . '</table>'
-        ],
+            'typical-use' => [
+                [ 'foo', 'bar' ],
+                [
+                    [ new Th('f1'), 'b1' ],
+                    [ 'f2', 'b2' ]
+                ],
+                null,
+                [ 'id' => 'overview' ],
+                '<table id="overview">'
+                . '<thead><tr><th>foo</th><th>bar</th></tr></thead>'
+                    . '<tbody><tr><th>f1</th><td>b1</td></tr><tr><td>f2</td><td>b2</td></tr></tbody>'
+                    . '</table>'
+            ],
 
-        'with-tr' => [
-        new Tr([ 'foo', 'bar' ], null, Th::class),
-        new Tr([ new Th('f1'), 'b1' ]),
-        new Tr([ 'FOO', 'BAR' ]),
-        null,
-        '<table>'
-        . '<thead><tr><th>foo</th><th>bar</th></tr></thead>'
-        . '<tbody><tr><th>f1</th><td>b1</td></tr></tbody>'
-        . '<tfoot><tr><td>FOO</td><td>BAR</td></tr></tfoot>'
-        . '</table>'
-        ],
+            'with-tr' => [
+                Tr::newFromItems([ 'foo', 'bar' ], null, Th::class),
+                Tr::newFromItems([ new Th('f1'), 'b1' ]),
+                Tr::newFromItems([ 'FOO', 'BAR' ]),
+                null,
+                '<table>'
+                . '<thead><tr><th>foo</th><th>bar</th></tr></thead>'
+                    . '<tbody><tr><th>f1</th><td>b1</td></tr></tbody>'
+                    . '<tfoot><tr><td>FOO</td><td>BAR</td></tr></tfoot>'
+                    . '</table>'
+            ],
 
 
-        'with-objects' => [
-        Thead::newFromCellsIterable([ 'foo', 'bar' ]),
-        Tbody::newFromRowsIterable(
-            [
-            [ new Th('f1'), 'b1' ],
-            [ 'f2', 'b2' ]
-            ]
-        ),
-        Tfoot::newFromCellsIterable([ 'FOO', 'BAR' ]),
-        new Map([ 'class' => 'green' ]),
-        '<table class="green">'
-        . '<thead><tr><th>foo</th><th>bar</th></tr></thead>'
-        . '<tbody><tr><th>f1</th><td>b1</td></tr><tr><td>f2</td><td>b2</td></tr></tbody>'
-        . '<tfoot><tr><td>FOO</td><td>BAR</td></tr></tfoot>'
-        . '</table>'
-        ]
+                'with-objects' => [
+                    Thead::newFromCellsIterable([ 'foo', 'bar' ]),
+                    Tbody::newFromRowsIterable(
+                        [
+                            [ new Th('f1'), 'b1' ],
+                            [ 'f2', 'b2' ]
+                        ]
+                    ),
+                    Tfoot::newFromCellsIterable([ 'FOO', 'BAR' ]),
+                    [ 'class' => 'green' ],
+                    '<table class="green">'
+                    . '<thead><tr><th>foo</th><th>bar</th></tr></thead>'
+                        . '<tbody><tr><th>f1</th><td>b1</td></tr><tr><td>f2</td><td>b2</td></tr></tbody>'
+                        . '<tfoot><tr><td>FOO</td><td>BAR</td></tr></tfoot>'
+                        . '</table>'
+                ]
         ];
     }
 }

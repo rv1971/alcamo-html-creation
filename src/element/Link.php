@@ -2,6 +2,7 @@
 
 namespace alcamo\html_creation\element;
 
+use alcamo\exception\FileNotFound;
 use alcamo\rdfa\MediaType;
 
 /**

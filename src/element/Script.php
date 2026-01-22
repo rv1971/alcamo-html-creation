@@ -27,7 +27,7 @@ class Script extends AbstractScriptSupportingElement
     ): self {
         /** Call
          *  alcamo::html_creation::element::Link::augmentLocalUrl(). */
-        static::augmentLocalUrl($src, $path);
+        Link::augmentLocalUrl($src, $path);
 
         /** Determine media type from the file unless the type is set in
          *  $attrs. */

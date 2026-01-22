@@ -36,7 +36,7 @@ class StylesheetTest extends TestCase
             'typical-use' => [
                 'foo.css',
                 null,
-                '<link rel="stylesheet" href="foo.css"/>'
+                '<link href="foo.css" rel="stylesheet"/>'
             ]
         ];
     }
@@ -74,7 +74,9 @@ class StylesheetTest extends TestCase
                 "${baseDir}alcamo.css",
                 [ 'disable' => true ],
                 null,
-                "<link disable=\"disable\" rel=\"stylesheet\" href=\"${baseDir}alcamo.css?m=$mCss\"/>"
+                "<link href=\"${baseDir}alcamo.css?m=$mCss\" "
+                . "type=\"text/css; charset=&quot;us-ascii&quot;\" "
+                    . "disable=\"disable\" rel=\"stylesheet\"/>"
             ]
         ];
     }

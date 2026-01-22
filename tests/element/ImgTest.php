@@ -36,27 +36,28 @@ class ImgTest extends TestCase
         $mJson = gmdate('YmdHis', filemtime("${baseDir}alcamo.json"));
 
         return [
-        'typical-use' => [
-        "${baseDir}alcamo-16.png",
-        '16x16',
-        null,
-        null,
-        "<img src=\"${baseDir}alcamo-16.png?m=$m16\" alt=\"16x16\" width=\"16\" height=\"16\"/>"
-        ],
-        'different-path' => [
-        '/images/alcamo-32.png?foo=bar',
-        '32x32',
-        [ 'id' => 'foo' ],
-        "${baseDir}alcamo-32.png",
-        "<img src=\"/images/alcamo-32.png?foo=bar&amp;m=$m32\" alt=\"32x32\" width=\"32\" height=\"32\" id=\"foo\"/>"
-        ],
-        'no-size' => [
-        "${baseDir}alcamo.json",
-        'unknown image format',
-        [ 'class' => 'special' ],
-        null,
-        "<img src=\"${baseDir}alcamo.json?m=$mJson\" alt=\"unknown image format\" class=\"special\"/>"
-        ]
+            'typical-use' => [
+                "${baseDir}alcamo-16.png",
+                '16x16',
+                null,
+                null,
+                "<img src=\"${baseDir}alcamo-16.png?m=$m16\" alt=\"16x16\" width=\"16\" height=\"16\"/>"
+            ],
+            'different-path' => [
+                '/images/alcamo-32.png?foo=bar',
+                '32x32',
+                [ 'id' => 'foo' ],
+                "${baseDir}alcamo-32.png",
+                "<img src=\"/images/alcamo-32.png?foo=bar&amp;m=$m32\" "
+                . "alt=\"32x32\" id=\"foo\" width=\"32\" height=\"32\"/>"
+            ],
+            'no-size' => [
+                "${baseDir}alcamo.json",
+                'unknown image format',
+                [ 'class' => 'special' ],
+                null,
+                "<img src=\"${baseDir}alcamo.json?m=$mJson\" alt=\"unknown image format\" class=\"special\"/>"
+            ]
         ];
     }
 

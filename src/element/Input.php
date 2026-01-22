@@ -63,7 +63,7 @@ class Input extends AbstractSpecificElement
     {
         parent::__construct(null, $attrs);
 
-        if (!in_array($attrs['type'], static::TYPES)) {
+        if (isset($attrs['type']) && !in_array($attrs['type'], static::TYPES)) {
             /** @throw alcamo::exception::InvalidEnumerator if the value for
              *  `type` is not a valid type. */
             throw (new InvalidEnumerator())->setMessageContext(

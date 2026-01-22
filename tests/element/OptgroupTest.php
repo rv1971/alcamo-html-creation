@@ -11,9 +11,9 @@ use alcamo\xml_creation\TokenList;
 class OptgroupTest extends TestCase
 {
   /**
-   * @dataProvider newFromValueSequenceProvider
+   * @dataProvider newFromValuesProvider
    */
-    public function testNewFromValueSequence(
+    public function testNewFromValues(
         $label,
         $values,
         $compareTo,
@@ -21,7 +21,7 @@ class OptgroupTest extends TestCase
         $expectedString
     ) {
         $optgroup =
-        Optgroup::newFromValueSequence($label, $values, $compareTo, $attrs);
+        Optgroup::newFromValues($label, $values, $compareTo, $attrs);
 
         $this->assertSame('optgroup', $optgroup->getTagName());
 
@@ -30,7 +30,7 @@ class OptgroupTest extends TestCase
         $this->assertEquals($expectedString, (string)$optgroup);
     }
 
-    public function newFromValueSequenceProvider()
+    public function newFromValuesProvider()
     {
         return [
         'empty' => [

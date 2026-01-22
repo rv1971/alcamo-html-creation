@@ -46,7 +46,7 @@ class OlTest extends TestCase
                     new Li('baz', [ 'id' => 'qux' ])
                 ]),
                 [ 'class' => 'important' ],
-                '<ol class="important"><li>43</li><script src="foo.js"></script>'
+                '<ol class="important"><li>43</li><script src="foo.js"/>'
                 . '<template>Lorem ipsum</template><li id="qux">baz</li></ol>',
             ],
         ];
