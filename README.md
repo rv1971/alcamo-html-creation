@@ -77,7 +77,7 @@ directory. It will output
 The package offers one class for each HTML element.
 
 For most of them, the constructor takes two parameters, the element
-content and optionallythe attribiutes. (Some elements have different
+content and optionally the attributes. (Some elements have different
 constructors, in particular elements like `<link>` which do not have a
 content).
 
@@ -92,12 +92,13 @@ The content can be:
 Each element automatically has an attribute `class` of type
 `alcamo\xml_creation\TokenList` which is empty at the beginning. This
 makes it easy to add classes to an element without caring whether it
-already has a `class` attribute, as in the above example. Attributes
-having an empty `TokenList` are suppressed in the output.
+already has a `class` attribute (and whether is already has the class
+to add), as in the above example. Attributes having an empty
+`TokenList` are suppressed in the output.
 
 Many classes have additional factory methods to simplify HTML
-creation, such as `Ul::newFromItems()´ in the above example. These
-methods are one of the prmary reasons why this package may be useful.
+creation, such as `Ul::newFromItems()` in the above example. These
+methods are one of the primary reasons why this package may be useful.
 
 See the doxygen documentation for details.
 
