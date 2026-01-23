@@ -11,9 +11,9 @@ use alcamo\xml_creation\TokenList;
 class SelectTest extends TestCase
 {
   /**
-   * @dataProvider newFromValueSequenceProvider
+   * @dataProvider newFromValuesProvider
    */
-    public function testNewFromValueSequence(
+    public function testNewFromValues(
         $name,
         $values,
         $compareTo,
@@ -21,7 +21,7 @@ class SelectTest extends TestCase
         $expectedString
     ) {
         $select =
-        Select::newFromValueSequence($name, $values, $compareTo, $attrs);
+        Select::newFromValues($name, $values, $compareTo, $attrs);
 
         $this->assertSame('select', $select->getTagName());
 
@@ -32,7 +32,7 @@ class SelectTest extends TestCase
         $this->assertEquals($expectedString, (string)$select);
     }
 
-    public function newFromValueSequenceProvider()
+    public function newFromValuesProvider()
     {
         return [
         'empty' => [

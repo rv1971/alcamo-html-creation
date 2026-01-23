@@ -20,7 +20,7 @@ class Select extends AbstractOptionList
      * @param $attrs Further attributes of the \<select> element. $name
      * overrides `$attrs['name']`.
      */
-    public static function newFromValueSequence(
+    public static function newFromValues(
         $name,
         iterable $values,
         $compareTo = null,
