@@ -38,4 +38,12 @@ class Script extends AbstractScriptSupportingElement
 
         return new static(null, [ 'src' => $src ] + (array)$attrs);
     }
+
+    public function __construct($content = null, ?array $attrs = null)
+    {
+        /**
+         * There are browsers which get confused with empty \<script> tags.
+         */
+        parent::__construct($content ?? '', $attrs);
+    }
 }
