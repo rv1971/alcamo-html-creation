@@ -46,7 +46,7 @@ class UlTest extends TestCase
                     new Li('baz', [ 'id' => 'qux' ])
                 ]),
                 [ 'class' => 'important' ],
-                '<ul class="important"><li>43</li><script src="foo.js"/>'
+                '<ul class="important"><li>43</li><script src="foo.js"></script>'
                 . '<template>Lorem ipsum</template><li id="qux">baz</li></ul>',
             ],
         ];

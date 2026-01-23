@@ -22,7 +22,7 @@ class ScriptTest extends TestCase
 
         $this->assertInstanceOf(TokenList::class, $script['class']);
 
-        $this->assertSame($content, $script->getContent());
+        $this->assertSame($content ?? '', $script->getContent());
 
         $this->assertEquals($expectedString, (string)$script);
     }
@@ -33,7 +33,7 @@ class ScriptTest extends TestCase
         'typcial-use' => [
         null,
         [ 'href' => 'foo.js' ],
-        '<script href="foo.js"/>'
+        '<script href="foo.js"></script>'
         ],
 
         'with-content' => [
@@ -77,13 +77,14 @@ class ScriptTest extends TestCase
                 "${baseDir}alcamo.js?baz=qux",
                 [ 'id' => 'js' ],
                 null,
-                "<script src=\"${baseDir}alcamo.js?baz=qux&amp;m=$m\" type=\"application/javascript\" id=\"js\"/>"
+                "<script src=\"${baseDir}alcamo.js?baz=qux&amp;m=$m\" type=\"application/javascript\" id=\"js\">"
+                . "</script>"
             ],
             'different-path' => [
                 '/scripts/alcamo.js',
                 null,
                 "${baseDir}alcamo.js",
-                "<script src=\"/scripts/alcamo.js?m=$m\" type=\"application/javascript\"/>"
+                "<script src=\"/scripts/alcamo.js?m=$m\" type=\"application/javascript\"></script>"
             ]
         ];
     }

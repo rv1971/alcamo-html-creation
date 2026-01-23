@@ -56,7 +56,7 @@ class TrTest extends TestCase
                 ]),
                 [ 'class' => 'important' ],
                 Th::class,
-                '<tr class="important"><th>43</th><script src="foo.js"/>'
+                '<tr class="important"><th>43</th><script src="foo.js"></script>'
                 . '<th>At vero eos </th><template>Lorem ipsum</template><td id="qux">baz</td></tr>',
             ],
         ];
