@@ -42,15 +42,17 @@ class Link extends AbstractSpecificElement
                 ->setMessageContext([ 'filename' => $path ]);
         }
 
-        $m = 'm=' . gmdate('YmdHis', filemtime($path));
-
         /** Append modification timestamp if not yet present in $href. */
         if (!isset($a[1])) {
-            $href .= "?$m";
+            $separator = '?';
         } elseif (
             substr($a[1], 0, 2) != 'm=' && strpos($a[1], '&m=') === false
         ) {
-            $href .= "&$m";
+            $separator = '&';
+        }
+
+        if (isset($separator)) {
+            $href .= "{$separator}m=" . gmdate('YmdHis', filemtime($path));
         }
     }
 
