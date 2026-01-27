@@ -2,7 +2,7 @@
 
 namespace alcamo\html_creation\element;
 
-use alcamo\xml_creation\Raw;
+use alcamo\xml_creation\{Comment, Raw};
 
 /**
  * @brief Base class for elements that may have \<tr> children
@@ -51,7 +51,8 @@ abstract class AbstractRowgroupElement extends AbstractSpecificElement
         foreach ($rows as $row) {
             if (isset($row)) {
                 $content[] =
-                    ($row instanceof Raw
+                    ($row instanceof Comment
+                     || $row instanceof Raw
                      || $row instanceof Tr
                      || $row instanceof AbstractScriptSupportingElement)
                     ? $row

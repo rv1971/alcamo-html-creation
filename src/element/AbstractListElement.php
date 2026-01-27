@@ -2,7 +2,7 @@
 
 namespace alcamo\html_creation\element;
 
-use alcamo\xml_creation\Raw;
+use alcamo\xml_creation\{Comment, Raw};
 
 /**
  * @brief Common parent of HTML elements \<ol> and \<ul>
@@ -24,7 +24,8 @@ abstract class AbstractListElement extends AbstractSpecificElement
         foreach ($items as $item) {
             if (isset($item)) {
                 $content[] =
-                    ($item instanceof Raw
+                    ($item instanceof Comment
+                     || $item instanceof Raw
                      || $item instanceof Li
                      || $item instanceof AbstractScriptSupportingElement)
                     ? $item

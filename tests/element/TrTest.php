@@ -4,7 +4,7 @@ namespace alcamo\html_creation\element;
 
 use Ds\Map;
 use PHPUnit\Framework\TestCase;
-use alcamo\xml_creation\TokenList;
+use alcamo\xml_creation\{Comment, TokenList};
 
 /* This also tests Element. */
 
@@ -36,6 +36,7 @@ class TrTest extends TestCase
             'array' => [
                 [
                     'FOO',
+                    new Comment('loremipsum'),
                     new Td(42),
                     new B('BAR'),
                     null,
@@ -43,7 +44,7 @@ class TrTest extends TestCase
                 ],
                 null,
                 null,
-                '<tr><td>FOO</td><td>42</td><td><b>BAR</b></td><th><i>QUX</i></th></tr>',
+                '<tr><td>FOO</td><!--loremipsum--><td>42</td><td><b>BAR</b></td><th><i>QUX</i></th></tr>',
             ],
 
             'Map' => [
