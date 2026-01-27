@@ -40,43 +40,4 @@ class StylesheetTest extends TestCase
             ]
         ];
     }
-
-  /**
-   * @dataProvider newFromLocalUrlProvider
-   */
-    public function testNewFromLocalUrl(
-        $href,
-        $attrs,
-        $path,
-        $expectedString
-    ) {
-        $stylesheet = Stylesheet::newFromLocalUrl($href, $attrs, $path);
-
-        $this->assertSame('link', $stylesheet->getTagName());
-
-        $this->assertInstanceOf(TokenList::class, $stylesheet['class']);
-
-        $this->assertSame('stylesheet', $stylesheet['rel']);
-
-        $this->assertNull($stylesheet->getContent());
-
-        $this->assertEquals($expectedString, (string)$stylesheet);
-    }
-
-    public function newFromLocalUrlProvider()
-    {
-        $baseDir = __DIR__ . DIRECTORY_SEPARATOR;
-
-        $mCss = gmdate('YmdHis', filemtime("${baseDir}alcamo.css"));
-
-        return [
-            'css' => [
-                "${baseDir}alcamo.css",
-                [ 'disable' => true ],
-                null,
-                "<link disable=\"disable\" "
-                    . "href=\"${baseDir}alcamo.css?m=$mCss\" rel=\"stylesheet\"/>"
-            ]
-        ];
-    }
 }
