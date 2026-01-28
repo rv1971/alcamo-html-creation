@@ -22,7 +22,9 @@ class FileResource
     /**
      * @param $path Path in the filesystem.
      *
-     * @param $uri URI to be published
+     * @param $uri URI to be published. Defaults to $path, which is useful for
+     * the simple case where $path is relative and can be used 1:1 as a
+     * relative url.
      *
      * @param $preferGz Whether to prefer a gzipped file, if
      * available. Default `false`.
@@ -31,13 +33,20 @@ class FileResource
      * appropriate suffix to the URI path. The URI must be constructed so that
      * this results in a URI correctly served by the webserver.
      */
-    public function __construct(string $path, $uri, ?bool $preferGz = null)
-    {
+    public function __construct(
+        string $path,
+        $uri = null,
+        ?bool $preferGz = null
+    ) {
         if (!is_readable($path)) {
             /** @throw alcamo::exception::FileNotFound if $path is not
              *  readable. */
             throw (new FileNotFound())
                 ->setMessageContext([ 'filename' => $path ]);
+        }
+
+        if (!isset($uri)) {
+            $uri = $path;
         }
 
         $this->path_ = $path;
