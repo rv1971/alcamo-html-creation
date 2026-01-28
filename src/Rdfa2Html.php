@@ -61,7 +61,7 @@ class Rdfa2Html
                 return new Meta(
                     [
                         'property' => $stmt->getPropCurie(),
-                        'content'  => $stmt->getObject()
+                        'content'  => $stmt
                     ]
                 );
         }
