@@ -200,6 +200,11 @@ class ResourceLinkFactory
                     $nodes[] = $item;
                     break;
 
+                /** - If an item is a FileResource, create HTML from it. */
+                case $item instanceof FileResource:
+                    $nodes[] = $this->createHtmlFromFileResource($item);
+                    break;
+
                  /** - If an item is an array, then take the first element as
                  * the path. If the second element is an array, take it as an
                  * array of attributes, otherwise as the value for the `rel`

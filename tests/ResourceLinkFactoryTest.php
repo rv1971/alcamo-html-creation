@@ -156,11 +156,13 @@ class ResourceLinkFactoryTest extends TestCase
             [
                 [
                     new Comment(' lorem ipsum '),
+                    new FileResource(self::BASE_DIR . 'alcamo.js', 'alcamo.js'),
                     'alcamo-32.png',
                     [ 'foo.json', 'manifest' ],
                     [ 'alcamo.css', [ 'id' => 'css' ] ]
                 ],
                 '<!-- lorem ipsum -->'
+                . '<script src="alcamo.js?m=00000000000000"></script>'
                 . '<link type="image/png" sizes="32x32" href="alcamo-32.png?m=00000000000000" rel="icon"/>'
                 . '<link rel="manifest" type="application/json" href="foo.json?m=00000000000000"/>'
                 . '<link id="css" href="alcamo.css?m=00000000000000" rel="stylesheet"/>'
