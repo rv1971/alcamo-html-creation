@@ -7,8 +7,7 @@ use alcamo\html_creation\Element;
 /**
  * @brief Base class for HTML element classes for specific tag names
  *
- * @attention Derived classes must define a public constant TAG_NAME
- * containing the tag name.
+ * @attention Derived classes must redefine the public constant TAG_NAME.
  *
  * @attention Note that the order of parameters is first content, then
  * attributes, unlike alcamo::html_creation::Element, because it happens very
@@ -18,6 +17,9 @@ use alcamo\html_creation\Element;
  */
 abstract class AbstractSpecificElement extends Element
 {
+    /// Tag name for elements of this class
+    public const TAG_NAME = '';
+
     /// Default attributes to add if not defined
     public const DEFAULT_ATTRS = [];
 
