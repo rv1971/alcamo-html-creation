@@ -3,7 +3,7 @@
 namespace alcamo\html_creation;
 
 use alcamo\exception\FileNotFound;
-use alcamo\rdfa\MediaType;
+use alcamo\rdf_literal\MediaType;
 use alcamo\uri\Uri;
 use Psr\Http\Message\UriInterface;
 

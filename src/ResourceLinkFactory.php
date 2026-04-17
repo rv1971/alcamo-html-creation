@@ -9,7 +9,7 @@ use alcamo\html_creation\element\{
     Script,
     Stylesheet
 };
-use alcamo\rdfa\MediaType;
+use alcamo\rdf_literal\MediaType;
 use alcamo\xml_creation\{AbstractNode, Nodes};
 
 /**
