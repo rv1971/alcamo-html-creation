@@ -2,6 +2,7 @@
 
 namespace alcamo\html_creation;
 
+use alcamo\html_creation\element\{A, Span};
 use alcamo\xml_creation\Element as XmlElement;
 use alcamo\xml_creation\TokenList;
 
@@ -20,6 +21,58 @@ class Element extends XmlElement
 {
     /// @copydoc alcamo::xml_creation::Element::ATTR_CLASS
     public const ATTR_CLASS = Attr::class;
+
+    /**
+     * @brief Create appropriate HTML element or bare content
+     *
+     * @param $content (visible) content of the element to create.
+     *
+     * @param $class Value for the `class` attribute.
+     *
+     * @param $title Value for the `title` attribute.
+     *
+     * @param $title Value for the `href` attribute.
+     *
+     * @param $attrs any other attributes. The above parameters override
+     * attributes given here.
+     *
+     * @return
+     * - `<a>`, if $href is set
+     * - `<span>`, if $href is not set but there are attributes
+     * - $content unchanged, otherwise
+     */
+    public static function createAOrSpan(
+        string $content,
+        ?string $class = null,
+        ?string $title = null,
+        ?string $href = null,
+        ?array $attrs = null
+    ): string {
+        $attrs = (array)$attrs;
+
+        if (isset($class)) {
+            $attrs['class'] = $class;
+        }
+
+        if (isset($title)) {
+            $attrs['title'] = $title;
+        }
+
+        if (isset($href)) {
+            $attrs['href'] = $href;
+        }
+
+        switch (true) {
+            case isset($href):
+                return new A($content, $attrs);
+
+            case $attrs:
+                return new Span($content, $attrs);
+
+            default:
+                return $content;
+        }
+    }
 
     /// Call XmlElement::__construct(), then sanitizeAttrs()
     public function __construct(
