@@ -5,7 +5,7 @@
     "license": "Apache-2.0",
     "require": {
         "php": "7.3 - 8.0",
-        "alcamo/rdfa": "^0.13",
+        "alcamo/rdfa": "0.13 - 0.15",
         "alcamo/uri": "^0.2",
         "alcamo/xml-creation": "^0.9"
     },
