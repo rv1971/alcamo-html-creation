@@ -43,7 +43,7 @@ class SimpleFileResourceFactory implements FileResourceFactoryInterface
         ?string $uriPrefix = null,
         ?bool $preferGz = null
     ) {
-        if ($baseDir[-1] != DIRECTORY_SEPARATOR) {
+        if (isset($baseDir) && $baseDir[-1] != DIRECTORY_SEPARATOR) {
             $baseDir .= DIRECTORY_SEPARATOR;
         }
 
